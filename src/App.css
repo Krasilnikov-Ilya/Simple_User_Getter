@@ -1,40 +1,75 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  min-height: 100vh;
+  background-color: #282c34;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
+  background-color: #181c24;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  padding-left: 5%;
-  padding-right: 5%;
+  justify-content: flex-start;
+  padding-top: calc(1vmin);
+  padding-bottom: calc(1vmin);
+  color: antiquewhite;
 }
 
-.App-link {
-  color: #61dafb;
+.Nav-link {
+  color: antiquewhite;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Nav-btn {
+  background-color: #282c34;
+  color: antiquewhite;
+  border-radius: 4px 20px;
+  min-width: 10%;
+}
+.Nav-btn:hover {
+  background: #484c54;
+}
+
+.tableButton {
+  background-color: #282c34;
+  color: antiquewhite;
+  border-radius: 4px 4px;
+  min-width: auto;
+}
+.tableButton:hover {
+  background: #484c54;
+}
+
+.workspace-up {
+  margin-left: 4%;
+  margin-right: 4%;
+  padding-bottom: 4%;
+  color: antiquewhite;
+}
+
+.Sort-btn {
+  background-color: #282c34;
+  color: antiquewhite;
+  border-radius: 1px 20px;
+}
+.Sort-btn:hover {
+  background: #484c54;
+}
+
+.table {
+  background-color: #282c34;
+  width: 100%;
+  border: 1px solid #dddddd;
+  border-collapse: collapse;
+  color: antiquewhite;
+}
+
+.table th {
+  font-weight: bold;
+  padding: 5px;
+  background-color: #282c34;
+  border: 1px solid #dddddd;
+}
+
+.table td {
+  border: 1px solid #dddddd;
+  padding: 5px;
 }
