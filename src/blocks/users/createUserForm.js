@@ -27,7 +27,7 @@ export class CreateUserForm extends React.Component {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr key="car">
+                    <tr key="user">
                         <td>ID will be generated</td>
                         <td><input id="first_name_send"/></td>
                         <td><input id="last_name_send"/></td>
@@ -51,7 +51,6 @@ export class CreateUserForm extends React.Component {
         let age = parseInt(document.getElementById("age_send").value)
         let sex = document.getElementById("sex_send").value
         let money = parseFloat(document.getElementById("money_send").value)
-
         let json =
             {
                 "firstName": firstName, "secondName": lastName, "age": age, "sex": sex, "money": money

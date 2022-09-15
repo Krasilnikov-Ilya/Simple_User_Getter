@@ -4,9 +4,13 @@ import React from "react"
 import ReadCarsUnsortedTable from "./blocks/cars/readCarsUnsortedTable";
 import ReadUsersUnsortedTable from "./blocks/users/readUsersUnsortedTable";
 import CreateCarForm from "./blocks/cars/createCarForm";
-import DeleteCarForm from "./blocks/cars/deleteCarForm";
-import UpdateCarForm from "./blocks/cars/updateCarForm";
 import CreateUserForm from "./blocks/users/createUserForm";
+import ReadHousesUnsortedTable from "./blocks/houses/readHousesUnsortedTable";
+import ReadHouseTable from "./blocks/houses/readHouseTable";
+import PlusUserMoneyForm from "./blocks/users/plusUserMoneyForm";
+import BuyCarForm from "./blocks/users/buyCarForm";
+import SettleUserToHomeForm from "./blocks/houses/settleUserToHomeForm";
+import CreateHouseForm from "./blocks/houses/createHouseform";
 
 
 function App() {
@@ -29,14 +33,14 @@ function App() {
                             <p>Добавить пользователя</p>
                         </button>
                     </Link>
-                    <Link className="Nav-link" to="/delete/users">
-                        <button className="Nav-btn" to="/delete/users">
-                            <p>Удалить пользователя</p>
+                    <Link className="Nav-link" to="/update/users/plusMoney">
+                        <button className="Nav-btn" to="/update/users/plusMoney">
+                            <p>Добавить пользователю денег</p>
                         </button>
                     </Link>
-                    <Link className="Nav-link" to="/update/users">
-                        <button className="Nav-btn" to="/update/users">
-                            <p>Изменить пользователя</p>
+                    <Link className="Nav-link" to="/update/users/buyCar">
+                        <button className="Nav-btn" to="/update/users/buyCar">
+                            <p>Купить пользователю машину</p>
                         </button>
                     </Link>
 
@@ -57,14 +61,27 @@ function App() {
                             <p>Добавить автомобиль</p>
                         </button>
                     </Link>
-                    <Link className="Nav-link" to="/delete/cars">
-                        <button className="Nav-btn" to="/delete/cars">
-                            <p>Удалить автомобиль</p>
+
+                    <hr/>
+
+                    <Link className="Nav-link" to="/read/houses">
+                        <button className="Nav-btn" to="/read/houses">
+                            <p>Посмотреть дома</p>
                         </button>
                     </Link>
-                    <Link className="Nav-link" to="/update/cars">
-                        <button className="Nav-btn" to="/update/cars">
-                            <p>Изменить автомобиль</p>
+                    <Link className="Nav-link" to="/read/house">
+                        <button className="Nav-btn" to="/read/house">
+                            <p>Посмотреть дом</p>
+                        </button>
+                    </Link>
+                    <Link className="Nav-link" to="/create/house">
+                        <button className="Nav-btn" to="/create/house">
+                            <p>Добавить дом</p>
+                        </button>
+                    </Link>
+                    <Link className="Nav-link" to="/update/houseAndUser">
+                        <button className="Nav-btn" to="/update/houseAndUser">
+                            <p>Поселить пользователя</p>
                         </button>
                     </Link>
                 </header>
@@ -76,10 +93,14 @@ function App() {
                         <Route path="/read/users" element={<ReadUsersUnsortedTable/>}/>
                         <Route path="/create/cars" element={<CreateCarForm/>}/>
                         <Route path="/create/users" element={<CreateUserForm/>}/>
-                        <Route path="/delete/cars" element={<DeleteCarForm/>}/>
-                        <Route path="/delete/users" element={<DeleteCarForm/>}/>
-                        <Route path="/update/cars" element={<UpdateCarForm/>}/>
-                        <Route path="/update/users" element={<UpdateCarForm/>}/>
+
+                        <Route path="/update/users/plusMoney" element={<PlusUserMoneyForm/>}/>
+                        <Route path="/update/users/buyCar" element={<BuyCarForm/>}/>
+                        <Route path="/update/houseAndUser" element={<SettleUserToHomeForm/>}/>
+
+                        <Route path="/read/houses" element={<ReadHousesUnsortedTable/>}/>
+                        <Route path="/read/house" element={<ReadHouseTable/>}/>
+                        <Route path="/create/house" element={<CreateHouseForm/>}/>
                     </Routes>
                 </section>
             </div>
