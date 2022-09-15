@@ -1,6 +1,6 @@
 import React from "react";
 import API from "../../utils/API";
-
+import {FLOAT_REGEXP, FLOAT_STEP, INT_REGEXP} from "../../utils/constants";
 
 export class CreateUserForm extends React.Component {
 
@@ -18,7 +18,7 @@ export class CreateUserForm extends React.Component {
                 <table className="table">
                     <thead>
                     <tr key="head">
-                        <th> ID:</th>
+                        <th> User ID:</th>
                         <th> First Name:</th>
                         <th> Last Name:</th>
                         <th> Age :</th>
@@ -31,9 +31,12 @@ export class CreateUserForm extends React.Component {
                         <td>ID will be generated</td>
                         <td><input id="first_name_send"/></td>
                         <td><input id="last_name_send"/></td>
-                        <td><input id="age_send"/></td>
-                        <td><input id="sex_send"/></td>
-                        <td><input id="money_send"/></td>
+                        <td><input type="number" pattern={INT_REGEXP} id="age_send"/></td>
+                        <td>
+                            <input type="radio" defaultChecked name="sex_send" value="MALE" id="sex_send"/>MALE
+                            <input type="radio" name="sex_send" value="FEMALE" id="sex_send"/>FEMALE
+                        </td>
+                        <td><input type="number" pattern={FLOAT_REGEXP} step={FLOAT_STEP} id="money_send"/></td>
                     </tr>
                     </tbody>
                 </table>
@@ -49,7 +52,13 @@ export class CreateUserForm extends React.Component {
         let firstName = document.getElementById("first_name_send").value
         let lastName = document.getElementById("last_name_send").value
         let age = parseInt(document.getElementById("age_send").value)
-        let sex = document.getElementById("sex_send").value
+        const buttons = document.querySelectorAll("input[name='sex_send']")
+        let sex = "MALE"
+        for (const b of buttons) {
+            if (b.checked) {
+                sex = b.value
+            }
+        }
         let money = parseFloat(document.getElementById("money_send").value)
         let json =
             {
@@ -60,18 +69,22 @@ export class CreateUserForm extends React.Component {
 
         let answer = " "
 
-        await API.post(
-            push_uri, json)
-            .then(function (response) {
-                answer = "Successfully pushed, code: " + response.status
-                console.log(response);
-            })
-            .catch(function (error) {
-                answer = error.toString()
-                console.log(error);
-            });
-        this.setState({answer})
-        console.log(this.state.answer)
+        if (firstName === "" || lastName === "" || !age || !money) {
+            answer = "Invalid request data"
+            this.setState({answer})
+        } else {
+            await API.post(
+                push_uri, json)
+                .then(function (response) {
+                    answer = "Successfully pushed, code: " + response.status
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    answer = error.toString()
+                    console.log(error);
+                });
+            this.setState({answer})
+        }
     }
 }
 

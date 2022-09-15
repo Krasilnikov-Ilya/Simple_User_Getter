@@ -1,5 +1,6 @@
 import React from "react";
 import API from "../../utils/API";
+import {FLOAT_REGEXP, FLOAT_STEP} from "../../utils/constants";
 
 
 export class CreateCarForm extends React.Component {
@@ -19,7 +20,7 @@ export class CreateCarForm extends React.Component {
                 <table className="table">
                     <thead>
                     <tr key="head">
-                        <th> ID:</th>
+                        <th> Car ID:</th>
                         <th> Engine Type:</th>
                         <th> Mark:</th>
                         <th> Model:</th>
@@ -32,7 +33,7 @@ export class CreateCarForm extends React.Component {
                         <td><input id="car_engine_type_send"/></td>
                         <td><input id="car_mark_send"/></td>
                         <td><input id="car_model_send"/></td>
-                        <td><input id="car_price_send"/></td>
+                        <td><input type="number" pattern={FLOAT_REGEXP} step={FLOAT_STEP} id="car_price_send"/></td>
                     </tr>
                     </tbody>
                 </table>
@@ -59,16 +60,21 @@ export class CreateCarForm extends React.Component {
 
         let answer = " "
 
-        await API.post(
-            push_uri, json)
-            .then(function (response) {
-                answer = "Successfully pushed, code: " + response.status
-                console.log(response);
-            })
-            .catch(function (error) {
-                answer = error.toString()
-                console.log(error);
-            });
+        if (type === "" || mark === "" || model === "" || !price) {
+            answer = "Invalid request data"
+            this.setState({answer})
+        } else {
+            await API.post(
+                push_uri, json)
+                .then(function (response) {
+                    answer = "Successfully pushed, code: " + response.status
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    answer = error.toString()
+                    console.log(error);
+                });
+        }
         this.setState({answer})
         console.log(this.state.answer)
     }

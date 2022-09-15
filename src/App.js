@@ -11,6 +11,9 @@ import PlusUserMoneyForm from "./blocks/users/plusUserMoneyForm";
 import BuyCarForm from "./blocks/users/buyCarForm";
 import SettleUserToHomeForm from "./blocks/houses/settleUserToHomeForm";
 import CreateHouseForm from "./blocks/houses/createHouseform";
+import AuthorizationForm from "./blocks/authorization/authorizationForm";
+import AllPostBlock from "./blocks/multiComponentBlocks/allPostBlock";
+
 
 
 function App() {
@@ -19,7 +22,7 @@ function App() {
             <div className="App">
                 <header className="App-header">
                     <Link className="Nav-link" to="/">
-                        <button className="Nav-btn">
+                        <button className="Home-auth-btn">
                             <p>Домой</p>
                         </button>
                     </Link>
@@ -43,11 +46,16 @@ function App() {
                             <p>Купить пользователю машину</p>
                         </button>
                     </Link>
+                    <Link className="Nav-link" to="/create/all">
+                        <button className="All-push-btn" to="/create/all">
+                            <p>ALL POST</p>
+                        </button>
+                    </Link>
 
                     <hr/>
 
                     <Link className="Nav-link" to="/authorization">
-                        <button className="Nav-btn" to="/authorization">
+                        <button className="Home-auth-btn" to="/authorization">
                             <p>Авторизация</p>
                         </button>
                     </Link>
@@ -61,9 +69,6 @@ function App() {
                             <p>Добавить автомобиль</p>
                         </button>
                     </Link>
-
-                    <hr/>
-
                     <Link className="Nav-link" to="/read/houses">
                         <button className="Nav-btn" to="/read/houses">
                             <p>Посмотреть дома</p>
@@ -88,7 +93,7 @@ function App() {
                 <section className="workspace-up">
                     <Routes>
                         <Route path="/" element={<h1> home page </h1>}/>
-                        <Route path="/authorization" element={<h1> authorization page </h1>}/>
+                        <Route path="/authorization" element={<AuthorizationForm/>}/>
                         <Route path="/read/cars" element={<ReadCarsUnsortedTable/>}/>
                         <Route path="/read/users" element={<ReadUsersUnsortedTable/>}/>
                         <Route path="/create/cars" element={<CreateCarForm/>}/>
@@ -101,6 +106,9 @@ function App() {
                         <Route path="/read/houses" element={<ReadHousesUnsortedTable/>}/>
                         <Route path="/read/house" element={<ReadHouseTable/>}/>
                         <Route path="/create/house" element={<CreateHouseForm/>}/>
+
+                        <Route path="/create/all" element={<AllPostBlock/>}/>
+
                     </Routes>
                 </section>
             </div>

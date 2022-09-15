@@ -1,5 +1,7 @@
 import React from "react";
 import API from "../../utils/API";
+import {FLOAT_REGEXP, FLOAT_STEP, INT_REGEXP} from "../../utils/constants";
+
 
 export class PlusUserMoneyForm extends React.Component {
 
@@ -18,14 +20,14 @@ export class PlusUserMoneyForm extends React.Component {
                 <table className="table">
                     <thead>
                     <tr key="head">
-                        <th> ID:</th>
+                        <th> User ID:</th>
                         <th> Money:</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr key="user">
-                        <td><input id="id_send"/></td>
-                        <td><input id="money_send"/></td>
+                        <td><input type="number" pattern={INT_REGEXP} id="id_send"/></td>
+                        <td><input type="number" pattern={FLOAT_REGEXP} step={FLOAT_STEP} id="money_send"/></td>
                     </tr>
                     </tbody>
                 </table>

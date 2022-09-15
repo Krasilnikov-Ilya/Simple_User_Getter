@@ -1,5 +1,6 @@
 import React from "react";
 import API from "../../utils/API";
+import {INT_REGEXP} from "../../utils/constants";
 
 
 export class BuyCarForm extends React.Component {
@@ -25,8 +26,8 @@ export class BuyCarForm extends React.Component {
                     </thead>
                     <tbody>
                     <tr key="user">
-                        <td><input id="user_send"/></td>
-                        <td><input id="car_send"/></td>
+                        <td><input type="number" pattern={INT_REGEXP} id="user_send"/></td>
+                        <td><input type="number" pattern={INT_REGEXP} id="car_send"/></td>
                     </tr>
                     </tbody>
                 </table>

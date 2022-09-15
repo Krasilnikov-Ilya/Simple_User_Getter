@@ -1,5 +1,6 @@
 import React from "react";
 import API from "../../utils/API";
+import {INT_REGEXP} from "../../utils/constants";
 
 
 export class SettleUserToHomeForm extends React.Component {
@@ -24,8 +25,8 @@ export class SettleUserToHomeForm extends React.Component {
                     </thead>
                     <tbody>
                     <tr key="user">
-                        <td><input id="user_send"/></td>
-                        <td><input id="home_send"/></td>
+                        <td><input type="number" pattern={INT_REGEXP} id="user_send"/></td>
+                        <td><input type="number" pattern={INT_REGEXP} id="home_send"/></td>
                     </tr>
                     </tbody>
                 </table>
@@ -39,7 +40,7 @@ export class SettleUserToHomeForm extends React.Component {
     }
 
     pushUserAndHomeToAPI = async () => {
-        let userId =  parseInt(document.getElementById("user_send").value)
+        let userId = parseInt(document.getElementById("user_send").value)
         let homeId = parseInt(document.getElementById("home_send").value)
         let push_uri = '/house/' + homeId + "/settle/" + userId
         let answer = " "

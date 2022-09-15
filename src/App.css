@@ -28,6 +28,30 @@
   background: #484c54;
 }
 
+.All-push-btn {
+  background-color: #282c34;
+  color: antiquewhite;
+  border-radius: 4px 20px;
+  min-width: 10%;
+  float: right;
+  margin-right: 4%;
+}
+.All-push-btn:hover {
+  background: #484c54;
+}
+
+.Home-auth-btn {
+  background-color: #282c34;
+  color: antiquewhite;
+  border-radius: 20px 4px;
+  min-width: 10%;
+  float: left;
+  margin-left: 4%;
+}
+.Home-auth-btn:hover {
+  background: #484c54;
+}
+
 .tableButton {
   background-color: #282c34;
   color: antiquewhite;
