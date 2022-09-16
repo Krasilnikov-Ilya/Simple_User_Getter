@@ -49,7 +49,7 @@ const AuthorizationForm = () => {
                 <h1> AUTHORIZATION </h1>
                 <hr/>
                 {(emailDirty && emailError) && <div style={{color: "red"}}> {emailError} </div>}
-                <input onChange={e => emailHandler(e)} value={email} onBlur={e => blurHandler(e)} name='email' type="text"
+                <input onChange={e => emailHandler(e)} value={email} onBlur={e => blurHandler(e)} name='email' type="email"
                        placeholder="Enter your email..."/>
                 <hr/>
                 {(passwordDirty && passwordError) && <div style={{color: "red"}}> {passwordError} </div>}
