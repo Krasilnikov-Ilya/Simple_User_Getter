@@ -1,68 +1,80 @@
-import React, {useState} from "react";
-import {EMAIL_REGEXP_RAW} from "../../utils/constants";
+import React from "react";
 
-const AuthorizationForm = () => {
+class AuthorizationForm extends React.Component {
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [emailDirty, setEmailDirty] = useState(false)
-    const [passwordDirty, setPasswordDirty] = useState(false)
-    const [emailError, setEmailError] = useState("Email cannot be empty")
-    const [passwordError, setPasswordError] = useState("Password cannot be empty")
-
-
-    const blurHandler = (e) => {
-        switch (e.target.name) {
-            default: break
-            case 'email':
-                setEmailDirty(true)
-                break
-            case 'password':
-                setPasswordDirty(true)
-                break
-        }
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+            emailDirty: false,
+            passwordDirty: false,
+            emailError: "Email cannot be empty",
+            passwordError: "Password cannot be empty",
+        };
     }
 
-    const emailHandler = (e) => {
-        setEmail(e.target.value)
-        const re = {EMAIL_REGEXP_RAW}
-        if(re.test(String(email).toLowerCase())) {
-            setEmailError("Incorrect Email")
-        } else {
-            setEmailError("")
+    render() {
+        const blurHandler = (e) => {
+            switch (e.target.name) {
+                case 'email':
+                    let emailDirty = true
+                    this.setState({emailDirty})
+                    break
+                case 'password':
+                    let passwordDirty = true
+                    this.setState({passwordDirty})
+            }
         }
-    }
 
-    const passwordHandler = (e) => {
-        setPassword(e.target.value)
-        if(e.target.value.length < 3 || e.target.value.length > 8) {
-            setPasswordError("Password length must be more than 3 symbols and less than 8 symbols")
-        } else {
-            setPasswordError("")
+        const emailHandler = (e) => {
+            let email = e.target.value
+            this.setState({email})
+            const re = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+            if (re.test(String(email).toLowerCase())) {
+                let emailError = ""
+                this.setState({emailError})
+            } else {
+                let emailError = "Incorrect Email"
+                this.setState({emailError})
+            }
         }
+
+        const passwordHandler = (e) => {
+            let password = e.target.value
+            this.setState({password})
+            if (e.target.value.length < 3 || e.target.value.length > 8) {
+                let passwordError = "Password length must be more than 3 symbols and less than 8 symbols"
+                this.setState({passwordError})
+            } else {
+                let passwordError = ""
+                this.setState({passwordError})
+            }
+        }
+
+        return (
+            <div>
+                <form>
+                    <hr/>
+                    <h1> AUTHORIZATION </h1>
+                    <hr/>
+                    {(this.state.emailDirty && this.state.emailError) && <div style={{color: "red"}}> {this.state.emailError} </div>}
+                    <input onChange={e => emailHandler(e)} onBlur={e => blurHandler(e)} name='email'
+                           type="email"
+                           placeholder="Enter your email..."/>
+                    <hr/>
+                    {(this.state.passwordDirty && this.state.passwordError) && <div style={{color: "red"}}> {this.state.passwordError} </div>}
+                    <input onChange={e => passwordHandler(e)} onBlur={e => blurHandler(e)}
+                           name='password'
+                           type="text"
+                           placeholder="Enter your password..."/>
+                    <hr/>
+                    <button type='submit' className="Nav-btn"> GO</button>
+                    <hr/>
+                </form>
+            </div>
+        );
     }
-
-    return (
-        <div>
-            <form>
-                <hr/>
-                <h1> AUTHORIZATION </h1>
-                <hr/>
-                {(emailDirty && emailError) && <div style={{color: "red"}}> {emailError} </div>}
-                <input onChange={e => emailHandler(e)} value={email} onBlur={e => blurHandler(e)} name='email' type="email"
-                       placeholder="Enter your email..."/>
-                <hr/>
-                {(passwordDirty && passwordError) && <div style={{color: "red"}}> {passwordError} </div>}
-                <input onChange={e => passwordHandler(e)} value={password} onBlur={e => blurHandler(e)} name='password' type="text"
-                       placeholder="Enter your password..."/>
-                <hr/>
-                <button type='submit' className="Nav-btn"> GO</button>
-                <hr/>
-            </form>
-        </div>
-    );
-
-
 }
 
 export default AuthorizationForm

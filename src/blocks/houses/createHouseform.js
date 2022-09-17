@@ -152,7 +152,7 @@ export class CreateHouseForm extends React.Component {
             third_parking_count < 0 ||
             fourth_parking_count < 0) {
             answer = "Invalid input data"
-            console.log(answer)
+            this.setState({answer})
         } else {
             await API.post(push_uri, json)
                 .then(function (response) {
@@ -164,7 +164,6 @@ export class CreateHouseForm extends React.Component {
                     console.log(error);
                 });
             this.setState({answer})
-            console.log(answer)
         }
     }
 }

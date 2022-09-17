@@ -1,5 +1,6 @@
 import React from "react";
 import API from "../../utils/API";
+import {INT_REGEXP} from "../../utils/constants";
 
 export class ReadHouseTable extends React.Component {
 
@@ -20,22 +21,27 @@ export class ReadHouseTable extends React.Component {
     }
 
     addHouse = async () => {
-        let num = document.getElementById("house_input").value
-        let houses_uri = '/house/' + num.toString();
-        let houseData = await API.get(houses_uri);
-        this.state = {
-            tableData: []
-        };
-        let tableData = [...this.state.tableData]
-        let data = {
-            id: houseData.data.id,
-            floorCount: houseData.data.floorCount,
-            price: houseData.data.price,
-            parkingPlaces: houseData.data.parkingPlaces,
-            lodgers: houseData.data.lodgers
+        let num = parseInt(document.getElementById("house_input").value)
+        if (!num || num < 1) {
+            console.log("Invalid input")
+        } else {
+            let houses_uri = '/house/' + num.toString();
+            let houseData = await API.get(houses_uri);
+            this.state = {
+                tableData: []
+            };
+            let tableData = [...this.state.tableData]
+            let data = {
+                id: houseData.data.id,
+                floorCount: houseData.data.floorCount,
+                price: houseData.data.price,
+                parkingPlaces: houseData.data.parkingPlaces,
+                lodgers: houseData.data.lodgers
+            }
+            tableData.push(data)
+            this.setState({tableData});
         }
-        tableData.push(data)
-        this.setState({tableData});
+
     }
 
     render() {
@@ -45,12 +51,12 @@ export class ReadHouseTable extends React.Component {
         return (
             <div>
                 <hr/>
-                <input id="house_input"/>
+                <input type="number" pattern={INT_REGEXP} id="house_input"/>
                 <button className="tableButton" onClick={this.addHouse}><p>Read</p></button>
                 <hr/>
                 <table className="table">
                     <thead>
-                    <tr key="head">
+                    <tr key="home">
                         <th> ID:</th>
                         <th> Floor Count:</th>
                         <th> Price:</th>
@@ -65,7 +71,7 @@ export class ReadHouseTable extends React.Component {
                 <hr/>
                 <table className="table">
                     <thead>
-                    <tr key="head">
+                    <tr key="person">
                         <th> ID:</th>
                         <th> First name:</th>
                         <th> Last name:</th>
@@ -81,7 +87,7 @@ export class ReadHouseTable extends React.Component {
                 <hr/>
                 <table className="table">
                     <thead>
-                    <tr key="head">
+                    <tr key="parking">
                         <th> ID:</th>
                         <th> isWarm:</th>
                         <th> isCovered:</th>
@@ -103,7 +109,7 @@ export class ReadHouseTable extends React.Component {
         let result = [];
         houseData.forEach(house => {
             result.push(
-                <tr key={house.id}>
+                <tr key={house.id + "house"}>
                     <td>{house.id}</td>
                     <td>{house.floorCount}</td>
                     <td>{house.price}</td>
@@ -127,7 +133,7 @@ export class ReadHouseTable extends React.Component {
         let result = [];
         lodgerData.forEach(lodger => {
             result.push(
-                <tr key={lodger.id}>
+                <tr key={lodger.id + "lodger"}>
                     <td>{lodger.id}</td>
                     <td>{lodger.firstName}</td>
                     <td>{lodger.secondName}</td>
@@ -146,7 +152,7 @@ export class ReadHouseTable extends React.Component {
         let result = [];
         parkingPlacesData.forEach(parkingPlace => {
             result.push(
-                <tr key={parkingPlace.id}>
+                <tr key={parkingPlace.id + "parking"}>
                     <td>{parkingPlace.id}</td>
                     <td>{parkingPlace.isWarm == null ? "null" :
                         parkingPlace.isWarm ? "warm" : "cold"}</td>
