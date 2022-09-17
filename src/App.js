@@ -13,6 +13,7 @@ import SettleUserToHomeForm from "./blocks/houses/settleUserToHomeForm";
 import CreateHouseForm from "./blocks/houses/createHouseform";
 import AuthorizationForm from "./blocks/authorization/authorizationForm";
 import AllPostBlock from "./blocks/multiComponentBlocks/allPostBlock";
+import {AxiosForm} from "./utils/axiosForm";
 
 
 
@@ -52,6 +53,7 @@ function App() {
                         </button>
                     </Link>
 
+
                     <hr/>
 
                     <Link className="Nav-link" to="/authorization">
@@ -89,6 +91,11 @@ function App() {
                             <p>Поселить пользователя</p>
                         </button>
                     </Link>
+                    <Link className="Nav-link" to="/reqres">
+                        <button className="All-push-btn" to="/reqres">
+                            <p>ReqRes.in</p>
+                        </button>
+                    </Link>
                 </header>
                 <section className="workspace-up">
                     <Routes>
@@ -108,6 +115,7 @@ function App() {
                         <Route path="/create/house" element={<CreateHouseForm/>}/>
 
                         <Route path="/create/all" element={<AllPostBlock/>}/>
+                        <Route path="/reqres" element={<AxiosForm/>}/>
 
                     </Routes>
                 </section>
