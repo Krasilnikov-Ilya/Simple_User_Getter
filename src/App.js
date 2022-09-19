@@ -14,7 +14,8 @@ import CreateHouseForm from "./blocks/houses/createHouseform";
 import AuthorizationForm from "./blocks/authorization/authorizationForm";
 import AllPostBlock from "./blocks/multiComponentBlocks/allPostBlock";
 import {AxiosForm} from "./utils/axiosForm";
-
+import FetchUsersUnsortedTable from "./blocks/users/fetchGetUserForm";
+import FetchCreateUserForm from "./blocks/users/fetchCreateUserForm";
 
 
 function App() {
@@ -32,9 +33,20 @@ function App() {
                             <p>Посмотреть пользователей</p>
                         </button>
                     </Link>
+                    <Link className="Nav-link" to="/read/users_fetch">
+                        <button className="Nav-btn" to="/read/users_fetch">
+                            <p>fetch /users</p>
+                        </button>
+                    </Link>
+
                     <Link className="Nav-link" to="/create/users">
                         <button className="Nav-btn" to="/create/users">
                             <p>Добавить пользователя</p>
+                        </button>
+                    </Link>
+                    <Link className="Nav-link" to="/create/user_fetch">
+                        <button className="Nav-btn" to="/create/user_fetch">
+                            <p>fetch /user/create</p>
                         </button>
                     </Link>
                     <Link className="Nav-link" to="/update/users/plusMoney">
@@ -117,6 +129,8 @@ function App() {
                         <Route path="/create/all" element={<AllPostBlock/>}/>
                         <Route path="/reqres" element={<AxiosForm/>}/>
 
+                        <Route path="/read/users_fetch" element={<FetchUsersUnsortedTable/>}/>
+                        <Route path="/create/user_fetch" element={<FetchCreateUserForm/>}/>
                     </Routes>
                 </section>
             </div>

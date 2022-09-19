@@ -1,7 +1,6 @@
 import React from "react";
-import API from "../../utils/API";
 
-export class ReadUsersUnsortedTable extends React.Component {
+export class FetchUsersUnsortedTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,8 +14,12 @@ export class ReadUsersUnsortedTable extends React.Component {
         this.state = {
             tableData: []
         };
-        let user_uri = '/users';
-        let userData = await API.get(user_uri);
+        let URI = "http://77.50.236.203:4880/users"
+        let response = (await fetch(URI, {
+            method: "GET"
+        }))
+        let data = await response.json();
+        let userData = {data}
         console.log(userData)
         let tableData = [...this.state.tableData]
         let j = userData.data.length
@@ -188,4 +191,4 @@ export class ReadUsersUnsortedTable extends React.Component {
 
 }
 
-export default ReadUsersUnsortedTable
+export default FetchUsersUnsortedTable
