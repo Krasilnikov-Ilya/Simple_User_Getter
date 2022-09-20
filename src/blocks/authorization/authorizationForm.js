@@ -24,13 +24,15 @@ class AuthorizationForm extends React.Component {
                 case 'password':
                     let passwordDirty = true
                     this.setState({passwordDirty})
+                    break
+                default: console.log("invalid target at blurHandler")
             }
         }
 
         const emailHandler = (e) => {
             let email = e.target.value
             this.setState({email})
-            const re = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+            const re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9][a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
             if (re.test(String(email).toLowerCase())) {
                 let emailError = ""
                 this.setState({emailError})
@@ -52,24 +54,35 @@ class AuthorizationForm extends React.Component {
             }
         }
 
+        const submit = () => {
+            if (this.state.passwordError === "" && this.state.emailError === "") {
+                console.log(this.state.passwordError);
+                console.log(this.state.emailError)
+            } else {
+                alert("Incorrect input data")
+            }
+        }
+
         return (
             <div>
                 <form>
                     <hr/>
                     <h1> AUTHORIZATION </h1>
                     <hr/>
-                    {(this.state.emailDirty && this.state.emailError) && <div style={{color: "red"}}> {this.state.emailError} </div>}
+                    {(this.state.emailDirty && this.state.emailError) &&
+                        <div style={{color: "red"}}> {this.state.emailError} </div>}
                     <input onChange={e => emailHandler(e)} onBlur={e => blurHandler(e)} name='email'
                            type="email"
                            placeholder="Enter your email..."/>
                     <hr/>
-                    {(this.state.passwordDirty && this.state.passwordError) && <div style={{color: "red"}}> {this.state.passwordError} </div>}
+                    {(this.state.passwordDirty && this.state.passwordError) &&
+                        <div style={{color: "red"}}> {this.state.passwordError} </div>}
                     <input onChange={e => passwordHandler(e)} onBlur={e => blurHandler(e)}
                            name='password'
                            type="text"
                            placeholder="Enter your password..."/>
                     <hr/>
-                    <button type='submit' className="Nav-btn"> GO</button>
+                    <button type='submit' onClick={submit} className="Nav-btn"> GO</button>
                     <hr/>
                 </form>
             </div>

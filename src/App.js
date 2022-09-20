@@ -23,91 +23,92 @@ function App() {
         <BrowserRouter>
             <div className="App">
                 <header className="App-header">
-                    <Link className="Nav-link" to="/">
-                        <button className="Home-auth-btn">
-                            <p>Домой</p>
-                        </button>
-                    </Link>
-                    <Link className="Nav-link" to="/read/users">
-                        <button className="Nav-btn" to="/read/users">
-                            <p>Посмотреть пользователей</p>
-                        </button>
-                    </Link>
-                    <Link className="Nav-link" to="/read/users_fetch">
-                        <button className="Nav-btn" to="/read/users_fetch">
-                            <p>fetch /users</p>
-                        </button>
-                    </Link>
 
-                    <Link className="Nav-link" to="/create/users">
-                        <button className="Nav-btn" to="/create/users">
-                            <p>Добавить пользователя</p>
-                        </button>
-                    </Link>
-                    <Link className="Nav-link" to="/create/user_fetch">
-                        <button className="Nav-btn" to="/create/user_fetch">
-                            <p>fetch /user/create</p>
-                        </button>
-                    </Link>
-                    <Link className="Nav-link" to="/update/users/plusMoney">
-                        <button className="Nav-btn" to="/update/users/plusMoney">
-                            <p>Добавить пользователю денег</p>
-                        </button>
-                    </Link>
-                    <Link className="Nav-link" to="/update/users/buyCar">
-                        <button className="Nav-btn" to="/update/users/buyCar">
-                            <p>Купить пользователю машину</p>
-                        </button>
-                    </Link>
-                    <Link className="Nav-link" to="/create/all">
-                        <button className="All-push-btn" to="/create/all">
-                            <p>ALL POST</p>
-                        </button>
-                    </Link>
+                        <Link className="Nav-link" target="_blank" to="/">
+                            <button className="Home-auth-btn" target="_blank" to="/">
+                                <p>Домой</p>
+                            </button>
+                        </Link>
+                        <Link className="Nav-link" to="/read/users">
+                            <button className="Nav-btn" to="/read/users">
+                                <p>Посмотреть пользователей</p>
+                            </button>
+                        </Link>
+                        <Link className="Nav-link" to="/read/users_fetch">
+                            <button className="Nav-btn" to="/read/users_fetch">
+                                <p>fetch /users</p>
+                            </button>
+                        </Link>
 
+                        <Link className="Nav-link" to="/create/users">
+                            <button className="Nav-btn" to="/create/users">
+                                <p>Добавить пользователя</p>
+                            </button>
+                        </Link>
+                        <Link className="Nav-link" to="/create/user_fetch">
+                            <button className="Nav-btn" to="/create/user_fetch">
+                                <p>fetch /user/create</p>
+                            </button>
+                        </Link>
+                        <Link className="Nav-link" to="/update/users/plusMoney">
+                            <button className="Nav-btn" to="/update/users/plusMoney">
+                                <p>Добавить пользователю денег</p>
+                            </button>
+                        </Link>
+                        <Link className="Nav-link" to="/update/users/buyCar">
+                            <button className="Nav-btn" to="/update/users/buyCar">
+                                <p>Купить пользователю машину</p>
+                            </button>
+                        </Link>
+                        <Link className="Nav-link" to="/create/all">
+                            <button className="All-push-btn" to="/create/all">
+                                <p>ALL POST</p>
+                            </button>
+                        </Link>
 
                     <hr/>
 
-                    <Link className="Nav-link" to="/authorization">
-                        <button className="Home-auth-btn" to="/authorization">
-                            <p>Авторизация</p>
-                        </button>
-                    </Link>
-                    <Link className="Nav-link" to="/read/cars">
-                        <button className="Nav-btn" to="/read/cars">
-                            <p>Посмотреть автомобили</p>
-                        </button>
-                    </Link>
-                    <Link className="Nav-link" to="/create/cars">
-                        <button className="Nav-btn" to="/create/cars">
-                            <p>Добавить автомобиль</p>
-                        </button>
-                    </Link>
-                    <Link className="Nav-link" to="/read/houses">
-                        <button className="Nav-btn" to="/read/houses">
-                            <p>Посмотреть дома</p>
-                        </button>
-                    </Link>
-                    <Link className="Nav-link" to="/read/house">
-                        <button className="Nav-btn" to="/read/house">
-                            <p>Посмотреть дом</p>
-                        </button>
-                    </Link>
-                    <Link className="Nav-link" to="/create/house">
-                        <button className="Nav-btn" to="/create/house">
-                            <p>Добавить дом</p>
-                        </button>
-                    </Link>
-                    <Link className="Nav-link" to="/update/houseAndUser">
-                        <button className="Nav-btn" to="/update/houseAndUser">
-                            <p>Поселить пользователя</p>
-                        </button>
-                    </Link>
-                    <Link className="Nav-link" to="/reqres">
-                        <button className="All-push-btn" to="/reqres">
-                            <p>ReqRes.in</p>
-                        </button>
-                    </Link>
+                        <Link className="Nav-link" target="_blank" to="/authorization">
+                            <button className="Home-auth-btn" target="_blank" to="/authorization">
+                                <p>Авторизация</p>
+                            </button>
+                        </Link>
+                        <Link className="Nav-link" to="/read/cars">
+                            <button className="Nav-btn" to="/read/cars">
+                                <p>Посмотреть автомобили</p>
+                            </button>
+                        </Link>
+                        <Link className="Nav-link" to="/create/cars">
+                            <button className="Nav-btn" to="/create/cars">
+                                <p>Добавить автомобиль</p>
+                            </button>
+                        </Link>
+                        <Link className="Nav-link" to="/read/houses">
+                            <button className="Nav-btn" to="/read/houses">
+                                <p>Посмотреть дома</p>
+                            </button>
+                        </Link>
+                        <Link className="Nav-link" to="/read/house">
+                            <button className="Nav-btn" to="/read/house">
+                                <p>Посмотреть дом</p>
+                            </button>
+                        </Link>
+                        <Link className="Nav-link" to="/create/house">
+                            <button className="Nav-btn" to="/create/house">
+                                <p>Добавить дом</p>
+                            </button>
+                        </Link>
+                        <Link className="Nav-link" to="/update/houseAndUser">
+                            <button className="Nav-btn" to="/update/houseAndUser">
+                                <p>Поселить пользователя</p>
+                            </button>
+                        </Link>
+                        <Link className="Nav-link" to="/reqres">
+                            <button className="All-push-btn" to="/reqres">
+                                <p>ReqRes.in</p>
+                            </button>
+                        </Link>
+
                 </header>
                 <section className="workspace-up">
                     <Routes>

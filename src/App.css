@@ -12,6 +12,7 @@
   padding-top: calc(1vmin);
   padding-bottom: calc(1vmin);
   color: antiquewhite;
+  overflow: hidden;
 }
 
 .Nav-link {
