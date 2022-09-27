@@ -6,6 +6,10 @@ import SettleUserToHomeForm from "../houses/settleUserToHomeForm";
 import PlusUserMoneyForm from "../users/plusUserMoneyForm";
 import BuyCarForm from "../users/buyCarForm";
 
+/**
+ * React-компонент, отвечающий за отображение всех форм создания POST запросов одновременно.
+ */
+
 export class AllPostBlock extends React.Component {
 
     render() {

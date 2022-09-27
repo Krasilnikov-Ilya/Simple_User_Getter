@@ -2,6 +2,16 @@ import React from "react";
 import API from "../../utils/API";
 import {INT_REGEXP} from "../../utils/constants";
 
+/**
+ * React-компонент, отвечающий за создание и отправку POST запроса,
+ * позволяющего внести пользователя по его ID в дом по его ID
+ *
+ * Для отправки запроса использует библиотеку axios и асинхронную функцию pushUserAndHomeToAPI,
+ * вызываемую кнопкой PUSH TO API.
+ * Функция pushUserAndHomeToAPI использует для составления запроса данные, введённые в поля.
+ *
+ * Для создания и отображения формы использует метод render().
+ */
 
 export class SettleUserToHomeForm extends React.Component {
 

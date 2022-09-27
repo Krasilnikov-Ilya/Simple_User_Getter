@@ -2,6 +2,14 @@ import React from "react";
 
 import {FLOAT_REGEXP, FLOAT_STEP, INT_REGEXP} from "../../utils/constants";
 
+/**
+ * Неполный аналог элемента CreateUserForm, использующий для реализации запроса
+ * асинхронную функцию, построенную без использования библиотеки Axios.
+ * Предназначен для получения иного типа ответа для целей дебага через DevTools.
+ *
+ * В качестве функциональной замены библиотеки используется метод fetch().
+ */
+
 export class FetchCreateUserForm extends React.Component {
 
     constructor(props) {

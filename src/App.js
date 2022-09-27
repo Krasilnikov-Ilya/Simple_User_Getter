@@ -1,6 +1,6 @@
 import './App.css';
 import React from "react"
-import {BrowserRouter, Routes, Route, Link} from "react-router-dom"
+import {Routes, Route, Link, HashRouter} from "react-router-dom"
 import AuthorizationForm from "./blocks/authorization/authorizationForm";
 import ReadCarsUnsortedTable from "./blocks/cars/readCarsUnsortedTable";
 import ReadUsersUnsortedTable from "./blocks/users/readUsersUnsortedTable";
@@ -17,9 +17,36 @@ import {AxiosForm} from "./utils/axiosForm";
 import FetchUsersUnsortedTable from "./blocks/users/fetchGetUserForm";
 import FetchCreateUserForm from "./blocks/users/fetchCreateUserForm";
 
+/**
+ * Одностраничное приложение react, рендерится в папку /build в виде статического сайта
+ * для дальнейшего хостинга на сервере.
+ * Папка /rendered предназначена для копирования и хранения на репозитории
+ * рабочей версии статического сайта.
+ *
+ * Все связанные с хостингом статического сайта файлы, скрипты и инструкции находятся в папке /server
+ *
+ * Для запуска рендеринга в статический сайт необходимо вызвать скрипт "build" из package.json
+ * Для проверки работоспособности тестами необходимо вызвать скрипт "test" из package.json
+ * Для временного развёртывания на localhost с целью проверки вручную
+ * или редактирования кода с одновременным отображением результатов в браузере
+ * необходимо вызвать скрипт "build" из package.json
+ *
+ * Приложение использует хэш-роутинг для отображения контента в зависимости от используемой ссылки.
+ * Все кнопки навигации расположены в хэдере и не подвержены изменению хэш-роутером.
+ * Все блоки форм и отправки запросов заключены в отображаемые в зависимости от ссылки
+ * react-компоненты, расположенные под хэдером.
+ *
+ * Футер в приложении отсутствует, а длина поля под хэдером меняется динамически, что позволяет
+ * прокручивать страницу в случае вывода большого количества информации.
+ *
+ * Все CSS стили расположены в файле App.css
+ *
+ * @returns {JSX.Element}
+ */
+
 function App() {
   return (
-      <BrowserRouter>
+      <HashRouter>
         <div className="App">
           <header className="App-header">
             <Link className="Nav-link" target="_blank" to="/">
@@ -133,7 +160,7 @@ function App() {
             </Routes>
           </section>
         </div>
-      </BrowserRouter>
+      </HashRouter>
   );
 }
 

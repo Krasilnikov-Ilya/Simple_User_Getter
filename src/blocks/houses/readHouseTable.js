@@ -2,6 +2,30 @@ import React from "react";
 import API from "../../utils/API";
 import {INT_REGEXP} from "../../utils/constants";
 
+/**
+ * React-компонент, отвечающий за создание и отправку GET запроса,
+ * позволяющего получить из БД данные по одному конкретному дому используя его ID.
+ *
+ * Для отправки запроса использует библиотеку axios и асинхронную функцию addHouse,
+ * вызываемую кнопкой Read.
+ * Функция addHouse использует для получения дома по ID данные, введённые в поле.
+ *
+ * Для создания и отображения таблицы использует метод render(), который вызывает метод
+ * renderHouseTableRows() для отображения информации о доме, а так же:
+ * renderParkingPlacesTableRows() для отображения информации о парковочных местах
+ * и renderLodgersTableRows() для тображения информации о жителях
+ *
+ * При создании обладает массивом tableData предназначенным для метода renderTableRows(),
+ * в котором содержатся пустые массивы parkingPlaces и lodgers, предназначенные для метода
+ * renderParkingPlacesTableRows() и renderLodgersTableRows() соответственно.
+ * Рендеринг работает в реальном времени, но т.к. данные отсутствуют,
+ * отрисовка новых элементов таблицы не происходит.
+ *
+ * После получения ответа от API его тело сохраняется в tableData, что инициирует образование
+ * новых элементов-домов методом renderHouseTableRows(), новых элементов-парковок методом
+ * renderParkingPlacesTableRows() и новых элементов-жителей методом renderLodgersTableRows()
+ */
+
 export class ReadHouseTable extends React.Component {
 
     constructor(props) {

@@ -2,6 +2,17 @@ import React from "react";
 import API from "../../utils/API";
 import {FLOAT_REGEXP, FLOAT_STEP, INT_REGEXP} from "../../utils/constants";
 
+/**
+ * React-компонент, отвечающий за создание и отправку POST запроса,
+ * позволяющего создать в БД новый дом посредством API
+ *
+ * Для создания и отображения формы ввода использует метод render()
+ * Для отправки запроса использует библиотеку axios и асинхронную функцию pushHouseToAPI,
+ * вызываемую кнопкой отправки данных.
+ * В случае, если данные корректны, функция собирает данные из полей формы,
+ * формирует из них json-файл и встраивает как тело запроса axios.
+ */
+
 export class CreateHouseForm extends React.Component {
 
     constructor(props) {

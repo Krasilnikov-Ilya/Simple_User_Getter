@@ -1,6 +1,11 @@
 import React from "react";
 import axios from "axios"
 
+/**
+ * React-компонент, предназначенный для подключения к сервису reqres.in и получения с него ответа на GET и POST запрос.
+ * Служит для целей дебага через DevTools.
+ */
+
 export class AxiosForm extends React.Component {
 
     constructor(props) {

@@ -2,6 +2,16 @@ import React from "react";
 import API from "../../utils/API";
 import {INT_REGEXP} from "../../utils/constants";
 
+/**
+ * React-компонент, отвечающий за создание и отправку POST запроса,
+ * позволяющего купить пользователю машину по его ID и ID машины
+ *
+ * Для отправки запроса использует библиотеку axios и асинхронную функцию pushUserAndCarToAPI,
+ * вызываемую кнопкой PUSH TO API.
+ * Функция pushUserAndCarToAPI использует для составления запроса данные, введённые в поля.
+ *
+ * Для создания и отображения формы использует метод render().
+ */
 
 export class BuyCarForm extends React.Component {
 

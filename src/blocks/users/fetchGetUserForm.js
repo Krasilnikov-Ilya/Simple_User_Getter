@@ -1,5 +1,13 @@
 import React from "react";
 
+/**
+ * Неполный аналог элемента ReadUsersUnsortedTable, использующий для реализации запроса
+ * асинхронную функцию, построенную без использования библиотеки Axios.
+ * Предназначен для получения иного типа ответа для целей дебага через DevTools.
+ *
+ * В качестве функциональной замены библиотеки используется метод fetch().
+ */
+
 export class FetchUsersUnsortedTable extends React.Component {
     constructor(props) {
         super(props);

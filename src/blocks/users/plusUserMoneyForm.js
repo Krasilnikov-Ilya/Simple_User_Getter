@@ -2,6 +2,16 @@ import React from "react";
 import API from "../../utils/API";
 import {FLOAT_REGEXP, FLOAT_STEP, INT_REGEXP} from "../../utils/constants";
 
+/**
+ * React-компонент, отвечающий за создание и отправку POST запроса,
+ * позволяющего добавить пользователю денег по его ID.
+ *
+ * Для отправки запроса использует библиотеку axios и асинхронную функцию pushUserAndMoneyToAPI,
+ * вызываемую кнопкой PUSH TO API.
+ * Функция pushUserAndMoneyToAPI использует для составления запроса данные, введённые в поля.
+ *
+ * Для создания и отображения формы использует метод render().
+ */
 
 export class PlusUserMoneyForm extends React.Component {
 
