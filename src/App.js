@@ -1,24 +1,24 @@
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from "react"
-import {Routes, Route, Link, HashRouter} from "react-router-dom"
-import AuthorizationForm from "./blocks/authorization/authorizationForm";
+import {Nav, Navbar, NavDropdown} from "react-bootstrap";
+import {Routes, Route, HashRouter} from "react-router-dom"
+import AuthorizationForm from "./boostrapBlocks/authorization/authorizationForm";
 import ReadCarsUnsortedTable from "./blocks/cars/readCarsUnsortedTable";
-import ReadUsersUnsortedTable from "./blocks/users/readUsersUnsortedTable";
 import CreateCarForm from "./blocks/cars/createCarForm";
-import CreateUserForm from "./blocks/users/createUserForm";
-import PlusUserMoneyForm from "./blocks/users/plusUserMoneyForm";
-import BuyCarForm from "./blocks/users/buyCarForm";
-import SettleUserToHomeForm from "./blocks/houses/settleUserToHomeForm";
+import PostUserMoney from "./boostrapBlocks/users/postUserMoney";
+import PostUserCar from "./boostrapBlocks/crossover/postUserCar";
+import PostUserHouse from "./boostrapBlocks/crossover/postUserHouse";
 import ReadHousesUnsortedTable from "./blocks/houses/readHousesUnsortedTable";
 import ReadHouseTable from "./blocks/houses/readHouseTable";
 import CreateHouseForm from "./blocks/houses/createHouseform";
-import AllPostBlock from "./blocks/multiComponentBlocks/allPostBlock";
+import AllPostBlock from "./boostrapBlocks/crossover/allPostBlock";
 import {AxiosForm} from "./utils/axiosForm";
-import FetchUsersUnsortedTable from "./blocks/users/fetchGetUserForm";
-import FetchCreateUserForm from "./blocks/users/fetchCreateUserForm";
+import GetUsers from "./boostrapBlocks/users/getUsers";
+import PostUser from "./boostrapBlocks/users/postUser";
+import "./logo192.png"
 
 /**
- * Одностраничное приложение react, рендерится в папку /build в виде статического сайта
+ * Одностраничное приложение react-bootstrap, рендерится в папку /build в виде статического сайта
  * для дальнейшего хостинга на сервере.
  * Папка /rendered предназначена для копирования и хранения на репозитории
  * рабочей версии статического сайта.
@@ -39,7 +39,7 @@ import FetchCreateUserForm from "./blocks/users/fetchCreateUserForm";
  * Футер в приложении отсутствует, а длина поля под хэдером меняется динамически, что позволяет
  * прокручивать страницу в случае вывода большого количества информации.
  *
- * Все CSS стили расположены в файле App.css
+ * Все CSS стили описаны напрямую в элементах.
  *
  * @returns {JSX.Element}
  */
@@ -48,115 +48,59 @@ function App() {
   return (
       <HashRouter>
         <div className="App">
-          <header className="App-header">
-            <Link className="Nav-link" target="_blank" to="/">
-              <button className="Home-auth-btn" target="_blank" to="/">
-                <p>Домой</p>
-              </button>
-            </Link>
-            <Link className="Nav-link" to="/read/users">
-              <button className="Nav-btn" to="/read/users">
-                <p>Посмотреть пользователей</p>
-              </button>
-            </Link>
-            <Link className="Nav-link" to="/read/users_fetch">
-              <button className="Nav-btn" to="/read/users_fetch">
-                <p>fetch /users</p>
-              </button>
-            </Link>
-
-            <Link className="Nav-link" to="/create/users">
-              <button className="Nav-btn" to="/create/users">
-                <p>Добавить пользователя</p>
-              </button>
-            </Link>
-            <Link className="Nav-link" to="/create/user_fetch">
-              <button className="Nav-btn" to="/create/user_fetch">
-                <p>fetch /user/create</p>
-              </button>
-            </Link>
-            <Link className="Nav-link" to="/update/users/plusMoney">
-              <button className="Nav-btn" to="/update/users/plusMoney">
-                <p>Добавить пользователю денег</p>
-              </button>
-            </Link>
-            <Link className="Nav-link" to="/update/users/buyCar">
-              <button className="Nav-btn" to="/update/users/buyCar">
-                <p>Купить пользователю машину</p>
-              </button>
-            </Link>
-
-            <hr/>
-
-            <Link className="Nav-link" target="_blank" to="/authorization">
-              <button className="Home-auth-btn" target="_blank" to="/authorization">
-                <p>Авторизация</p>
-              </button>
-            </Link>
-            <Link className="Nav-link" to="/read/cars">
-              <button className="Nav-btn" to="/read/cars">
-                <p>Посмотреть автомобили</p>
-              </button>
-            </Link>
-            <Link className="Nav-link" to="/create/cars">
-              <button className="Nav-btn" to="/create/cars">
-                <p>Добавить автомобиль</p>
-              </button>
-            </Link>
-            <Link className="Nav-link" to="/read/houses">
-              <button className="Nav-btn" to="/read/houses">
-                <p>Посмотреть дома</p>
-              </button>
-            </Link>
-            <Link className="Nav-link" to="/read/house">
-              <button className="Nav-btn" to="/read/house">
-                <p>Посмотреть дом</p>
-              </button>
-            </Link>
-            <Link className="Nav-link" to="/create/house">
-              <button className="Nav-btn" to="/create/house">
-                <p>Добавить дом</p>
-              </button>
-            </Link>
-            <Link className="Nav-link" to="/update/houseAndUser">
-              <button className="Nav-btn" to="/update/houseAndUser">
-                <p>Поселить пользователя</p>
-              </button>
-            </Link>
-            <Link className="Nav-link" to="/create/all">
-              <button className="All-push-btn" to="/create/all">
-                <p>ALL POST</p>
-              </button>
-            </Link>
-            <Link className="Nav-link" to="/reqres">
-              <button className="All-push-btn" to="/reqres">
-                <p>ReqRes.in</p>
-              </button>
-            </Link>
-
-          </header>
-          <section className="workspace-up">
+          <Navbar className="App-header" style={{padding: "2%"}} bg="light" expand="lg">
+            <Navbar.Brand href="#">&nbsp;&nbsp;&nbsp;<img
+                src="logo192.png"
+                width="32"
+                height="32"
+                className="d-inline-block align-top"
+                alt=""
+            />&nbsp;&nbsp;PFLB&nbsp;Test-API</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                <NavDropdown title="Users" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="#/read/users">Read all</NavDropdown.Item>
+                  <NavDropdown.Item href="#/create/user">Create new</NavDropdown.Item>
+                  <NavDropdown.Item href="#/update/users/plusMoney">Add money</NavDropdown.Item>
+                  <NavDropdown.Item href="#/update/users/buyCar">Buy a car</NavDropdown.Item>
+                  <NavDropdown.Item href="#/update/houseAndUser">Settle to home</NavDropdown.Item>
+                </NavDropdown>
+                <NavDropdown title="Cars" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="#/read/cars">Read all</NavDropdown.Item>
+                  <NavDropdown.Item href="#/create/cars">Create new</NavDropdown.Item>
+                  <NavDropdown.Item href="#/update/users/buyCar">Buy for user</NavDropdown.Item>
+                </NavDropdown>
+                <NavDropdown title="Houses" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="#/read/houses">Read all</NavDropdown.Item>
+                  <NavDropdown.Item href="#/create/house">Create new</NavDropdown.Item>
+                  <NavDropdown.Item href="#/update/houseAndUser">Settle user</NavDropdown.Item>
+                </NavDropdown>
+                <Nav.Link href="#/create/all">All POST</Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+          <section className="workspace" style={{textAlign: "center", margin: "2%"}}>
             <Routes>
-              <Route path="/" element={<h1> home page </h1>}/>
-              <Route path="/authorization" element={<AuthorizationForm/>}/>
-              <Route path="/read/cars" element={<ReadCarsUnsortedTable/>}/>
-              <Route path="/read/users" element={<ReadUsersUnsortedTable/>}/>
-              <Route path="/create/cars" element={<CreateCarForm/>}/>
-              <Route path="/create/users" element={<CreateUserForm/>}/>
+              <Route path="/" element={<AuthorizationForm/>}/>
 
-              <Route path="/update/users/plusMoney" element={<PlusUserMoneyForm/>}/>
-              <Route path="/update/users/buyCar" element={<BuyCarForm/>}/>
-              <Route path="/update/houseAndUser" element={<SettleUserToHomeForm/>}/>
+              <Route path="/read/users" element={<GetUsers/>}/>
+              <Route path="/create/user" element={<PostUser/>}/>
+
+              <Route path="/create/cars" element={<CreateCarForm/>}/>
+              <Route path="/read/cars" element={<ReadCarsUnsortedTable/>}/>
 
               <Route path="/read/houses" element={<ReadHousesUnsortedTable/>}/>
               <Route path="/read/house" element={<ReadHouseTable/>}/>
               <Route path="/create/house" element={<CreateHouseForm/>}/>
 
               <Route path="/create/all" element={<AllPostBlock/>}/>
-              <Route path="/reqres" element={<AxiosForm/>}/>
 
-              <Route path="/read/users_fetch" element={<FetchUsersUnsortedTable/>}/>
-              <Route path="/create/user_fetch" element={<FetchCreateUserForm/>}/>
+              <Route path="/update/users/plusMoney" element={<PostUserMoney/>}/>
+              <Route path="/update/users/buyCar" element={<PostUserCar/>}/>
+              <Route path="/update/houseAndUser" element={<PostUserHouse/>}/>
+
+              <Route path="/reqres" element={<AxiosForm/>}/>
             </Routes>
           </section>
         </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import {Button, Card} from "react-bootstrap";
 
 /**
  * React-компонент - форма авторизации, предназначеная для проверки вводимых пользователем данных в реальном времени,
@@ -32,8 +33,8 @@ class AuthorizationForm extends React.Component {
             password: '', // введённый пароль, считывается в реальном времени.
             emailDirty: false, // была ли попытка ввести email
             passwordDirty: false, // была ли попытка ввести пароль
-            emailError: "Email cannot be empty",
-            passwordError: "Password cannot be empty",
+            emailError: "email cannot be empty",
+            passwordError: "password cannot be empty",
         };
     }
 
@@ -48,7 +49,8 @@ class AuthorizationForm extends React.Component {
                     let passwordDirty = true
                     this.setState({passwordDirty})
                     break
-                default: console.log("invalid target at blurHandler")
+                default:
+                    console.log("invalid target at blurHandler")
             }
         }
 
@@ -60,7 +62,7 @@ class AuthorizationForm extends React.Component {
                 let emailError = ""
                 this.setState({emailError})
             } else {
-                let emailError = "Incorrect Email"
+                let emailError = "incorrect Email"
                 this.setState({emailError})
             }
         }
@@ -69,7 +71,7 @@ class AuthorizationForm extends React.Component {
             let password = e.target.value
             this.setState({password})
             if (e.target.value.length < 3 || e.target.value.length > 8) {
-                let passwordError = "Password length must be more than 3 symbols and less than 8 symbols"
+                let passwordError = "password length must be more than 3 symbols and less than 8 symbols"
                 this.setState({passwordError})
             } else {
                 let passwordError = ""
@@ -88,26 +90,28 @@ class AuthorizationForm extends React.Component {
 
         return (
             <div>
-                <form>
-                    <hr/>
-                    <h1> AUTHORIZATION </h1>
-                    <hr/>
-                    {(this.state.emailDirty && this.state.emailError) &&
-                        <div style={{color: "red"}}> {this.state.emailError} </div>}
-                    <input onChange={e => emailHandler(e)} onBlur={e => blurHandler(e)} name='email'
-                           type="email"
-                           placeholder="Enter your email..."/>
-                    <hr/>
-                    {(this.state.passwordDirty && this.state.passwordError) &&
-                        <div style={{color: "red"}}> {this.state.passwordError} </div>}
-                    <input onChange={e => passwordHandler(e)} onBlur={e => blurHandler(e)}
-                           name='password'
-                           type="text"
-                           placeholder="Enter your password..."/>
-                    <hr/>
-                    <button type='submit' onClick={submit} className="Nav-btn"> GO</button>
-                    <hr/>
-                </form>
+                <Card  bg="light" style={{width: "max-content", minWidth: "20%"}}>
+                    <Card.Body>
+                        <Card.Title> Authorization </Card.Title>
+                        <hr/>
+                        {(this.state.emailDirty && this.state.emailError) &&
+                            <div style={{color: "red"}}> {this.state.emailError} </div>}
+                        {(!this.state.emailDirty && this.state.emailError) &&
+                            <div style={{color: "red"}}>&nbsp;</div>}
+                        <input onChange={e => emailHandler(e)} onBlur={e => blurHandler(e)} name='email'
+                               type="email"
+                               placeholder="Enter your email..."/>
+                        <hr/>
+                        {(this.state.passwordDirty && this.state.passwordError) &&
+                            <div style={{color: "red"}}> {this.state.passwordError} </div>}
+                        <input onChange={e => passwordHandler(e)} onBlur={e => blurHandler(e)}
+                               name='password'
+                               type="text"
+                               placeholder="Enter your password..."/>
+                        <hr/>
+                        <Button variant="primary" type='submit' onClick={submit} className="Nav-btn"> GO</Button>
+                    </Card.Body>
+                </Card>
             </div>
         );
     }
