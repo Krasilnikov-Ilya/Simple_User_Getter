@@ -1,11 +1,12 @@
 import React from "react";
 import API from "../../utils/API";
+import {Button, Table} from "react-bootstrap";
 
 /**
  * React-компонент, отвечающий за создание и отправку GET запроса,
  * позволяющего получить из БД новый все существующие дома.
  *
- * Для отправки запроса использует библиотеку axios и асинхронную функцию addHouse,
+ * Для отправки запроса использует библиотеку axios и асинхронную функцию readHouses,
  * вызываемую кнопкой Read.
  *
  * Для создания и отображения таблицы использует метод render(), которая вызывает метод
@@ -23,27 +24,23 @@ import API from "../../utils/API";
  * парковочных мест и жителей методами renderParkingPlacesTableRows(row) и renderLodgersTableRows(row) соответственно
  */
 
-export class ReadHousesUnsortedTable extends React.Component {
+export class GetHouses extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             tableData: []
         };
-        this.addHouse = this.addHouse.bind(this)
+        this.readHouses = this.readHouses.bind(this)
         this.renderLodgersTableRows = this.renderLodgersTableRows.bind(this)
         this.renderParkingPlacesTableRows = this.renderParkingPlacesTableRows.bind(this)
         this.renderHouseTableRows = this.renderHouseTableRows.bind(this)
     }
 
-    addHouse = async () => {
-        console.log(this.state.tableData)
-        this.state = {
-            tableData: []
-        };
+    async readHouses() {
         let houses_uri = '/houses';
         let houseData = await API.get(houses_uri);
-        let tableData = [...this.state.tableData]
+        let tableData = []
         let j = houseData.data.length
         for (let i = 0; i < j; i++) {
             let data = {
@@ -55,30 +52,28 @@ export class ReadHousesUnsortedTable extends React.Component {
             }
             tableData.push(data)
         }
-        console.log(tableData)
         this.setState({tableData});
     }
 
     render() {
         return (
             <div>
+                <Button variant="primary" className="tableButton" onClick={this.addHouse}>Reload</Button>
                 <hr/>
-                <button className="tableButton" onClick={this.addHouse}><p>Read</p></button>
-                <hr/>
-                <table className="table">
+                <Table bordered className="table">
                     <thead>
                     <tr key="head">
                         <th> ID:</th>
-                        <th> Floor Count:</th>
+                        <th> Floor&nbsp;Count:</th>
                         <th> Price:</th>
-                        <th> Parking Places:</th>
+                        <th> Parking&nbsp;Places:</th>
                         <th> Lodgers:</th>
                     </tr>
                     </thead>
                     <tbody>
                     {this.renderHouseTableRows()}
                     </tbody>
-                </table>
+                </Table>
             </div>
 
         )
@@ -96,7 +91,7 @@ export class ReadHousesUnsortedTable extends React.Component {
                     <td>{house.floorCount}</td>
                     <td>{house.price}</td>
                     <td>
-                        <table className="table">
+                        <Table striped bordered hover  className="table">
                             <thead>
                             <tr key="head">
                                 <th> ID:</th>
@@ -108,15 +103,15 @@ export class ReadHousesUnsortedTable extends React.Component {
                             <tbody>
                             {this.renderParkingPlacesTableRows(row)}
                             </tbody>
-                        </table>
+                        </Table>
                     </td>
                     <td>
-                        <table className="table">
+                        <Table striped bordered hover className="table">
                             <thead>
                             <tr key="head">
                                 <th> ID:</th>
-                                <th> First name:</th>
-                                <th> Last name:</th>
+                                <th> First&nbsp;name:</th>
+                                <th> Last&nbsp;name:</th>
                                 <th> Age:</th>
                                 <th> Sex:</th>
                                 <th> Money:</th>
@@ -125,7 +120,7 @@ export class ReadHousesUnsortedTable extends React.Component {
                             <tbody>
                             {this.renderLodgersTableRows(row)}
                             </tbody>
-                        </table>
+                        </Table>
                     </td>
                 </tr>
             )
@@ -169,6 +164,10 @@ export class ReadHousesUnsortedTable extends React.Component {
         });
         return result;
     }
+
+    componentDidMount() {
+        this.readHouses().catch(function (error){console.log(error);})
+    }
 }
 
-export default ReadHousesUnsortedTable
+export default GetHouses

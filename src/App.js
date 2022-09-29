@@ -3,14 +3,14 @@ import React from "react"
 import {Nav, Navbar, NavDropdown} from "react-bootstrap";
 import {Routes, Route, HashRouter} from "react-router-dom"
 import AuthorizationForm from "./boostrapBlocks/authorization/authorizationForm";
-import ReadCarsUnsortedTable from "./blocks/cars/readCarsUnsortedTable";
-import CreateCarForm from "./blocks/cars/createCarForm";
+import GetCars from "./boostrapBlocks/cars/getCars";
+import PostCar from "./boostrapBlocks/cars/postCar";
 import PostUserMoney from "./boostrapBlocks/users/postUserMoney";
 import PostUserCar from "./boostrapBlocks/crossover/postUserCar";
 import PostUserHouse from "./boostrapBlocks/crossover/postUserHouse";
-import ReadHousesUnsortedTable from "./blocks/houses/readHousesUnsortedTable";
-import ReadHouseTable from "./blocks/houses/readHouseTable";
-import CreateHouseForm from "./blocks/houses/createHouseform";
+import GetHouses from "./boostrapBlocks/houses/getHouses";
+import ReadHouseById from "./boostrapBlocks/houses/readHouseById";
+import PostHouse from "./boostrapBlocks/houses/postHouse";
 import AllPostBlock from "./boostrapBlocks/crossover/allPostBlock";
 import {AxiosForm} from "./utils/axiosForm";
 import GetUsers from "./boostrapBlocks/users/getUsers";
@@ -51,8 +51,8 @@ function App() {
           <Navbar className="App-header" style={{padding: "2%"}} bg="light" expand="lg">
             <Navbar.Brand href="#">&nbsp;&nbsp;&nbsp;<img
                 src="logo192.png"
-                width="32"
-                height="32"
+                width={"32"}
+                height={"32"}
                 className="d-inline-block align-top"
                 alt=""
             />&nbsp;&nbsp;PFLB&nbsp;Test-API</Navbar.Brand>
@@ -64,7 +64,7 @@ function App() {
                   <NavDropdown.Item href="#/create/user">Create new</NavDropdown.Item>
                   <NavDropdown.Item href="#/update/users/plusMoney">Add money</NavDropdown.Item>
                   <NavDropdown.Item href="#/update/users/buyCar">Buy a car</NavDropdown.Item>
-                  <NavDropdown.Item href="#/update/houseAndUser">Settle to home</NavDropdown.Item>
+                  <NavDropdown.Item href="#/update/houseAndUser">Settle to house</NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown title="Cars" id="basic-nav-dropdown">
                   <NavDropdown.Item href="#/read/cars">Read all</NavDropdown.Item>
@@ -87,12 +87,12 @@ function App() {
               <Route path="/read/users" element={<GetUsers/>}/>
               <Route path="/create/user" element={<PostUser/>}/>
 
-              <Route path="/create/cars" element={<CreateCarForm/>}/>
-              <Route path="/read/cars" element={<ReadCarsUnsortedTable/>}/>
+              <Route path="/create/cars" element={<PostCar/>}/>
+              <Route path="/read/cars" element={<GetCars/>}/>
 
-              <Route path="/read/houses" element={<ReadHousesUnsortedTable/>}/>
-              <Route path="/read/house" element={<ReadHouseTable/>}/>
-              <Route path="/create/house" element={<CreateHouseForm/>}/>
+              <Route path="/read/houses" element={<GetHouses/>}/>
+              <Route path="/read/house" element={<ReadHouseById/>}/>
+              <Route path="/create/house" element={<PostHouse/>}/>
 
               <Route path="/create/all" element={<AllPostBlock/>}/>
 

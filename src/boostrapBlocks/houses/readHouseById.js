@@ -26,7 +26,7 @@ import {INT_REGEXP} from "../../utils/constants";
  * renderParkingPlacesTableRows() и новых элементов-жителей методом renderLodgersTableRows()
  */
 
-export class ReadHouseTable extends React.Component {
+export class ReadHouseById extends React.Component {
 
     constructor(props) {
         super(props);
@@ -190,4 +190,4 @@ export class ReadHouseTable extends React.Component {
     }
 }
 
-export default ReadHouseTable
+export default ReadHouseById

@@ -9,7 +9,7 @@ export class PostUser extends React.Component {
         super(props);
         this.state = {
             answer: "not pushed",
-            id: null,
+            newUserId: null,
             firstNameInput: "",
             lastNameInput: "",
             ageInput: null,
@@ -60,7 +60,6 @@ export class PostUser extends React.Component {
                     <tr key="user">
                         <td>ID will be generated</td>
                         <td><input id="first_name_send" onChange={e => userFirstNameHandler(e)}/></td>
-
                         <td><input id="last_name_send" onChange={e => userLastNameHandler(e)}/></td>
                         <td><input type="number" pattern={INT_REGEXP} id="age_send" onChange={e => userAgeHandler(e)}/>
                         </td>
@@ -78,11 +77,11 @@ export class PostUser extends React.Component {
                 </Table>
                 <ButtonGroup>
                     <Button className="tableButton" onClick={this.createUser}
-                            variant="primary">--&nbsp;PUSH&nbsp;TO&nbsp;API&nbsp;--</Button>
+                        variant="primary">--&nbsp;PUSH&nbsp;TO&nbsp;API&nbsp;--</Button>
                     <Button className="status" disabled
                             variant="secondary">{"Status: " + this.state.answer}</Button>
-                    <Button className="money" disabled
-                            variant="secondary">{this.state.id}</Button>
+                    <Button className="newId" disabled
+                            variant="secondary">{this.state.newUserId}</Button>
                 </ButtonGroup>
                 <hr/>
             </div>
@@ -99,25 +98,27 @@ export class PostUser extends React.Component {
         }
         let push_uri = '/addUser'
         let answer = " "
-        let id = null
-        if (json.firstName === "" || json.secondName === "" || isNaN(json.age) || json.age == null
+        let newUserId = null
+        if (json.firstName === "" || json.secondName === "" || isNaN(json.age) || json.age == null || json.age <= 0
             || isNaN(json.money) || json.money == null || !this.state.sexEntered) {
             answer = "Invalid request data"
+            newUserId = null
             this.setState({answer})
+            this.setState({newUserId})
         } else {
             await API.post(
                 push_uri, json)
                 .then(function (response) {
                     answer = "Successfully pushed, code: " + response.status
                     console.log(response);
-                    id = "New user ID: " + response.data.id
+                    newUserId = "New user ID: " + response.data.id
 
                 })
                 .catch(function (error) {
                     answer = error.toString()
                     console.log(error);
                 });
-            this.setState({id})
+            this.setState({newUserId})
             this.setState({answer})
         }
     }

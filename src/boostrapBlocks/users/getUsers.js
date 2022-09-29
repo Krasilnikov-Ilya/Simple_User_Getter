@@ -19,23 +19,23 @@ export class GetUsers extends React.Component {
                 <ButtonGroup aria-label="sort">
                     <Button variant="primary" onClick={this.readUsers.bind(this)}>Reload</Button>
                     <Button variant="secondary" disabled>Sort&nbsp;by:</Button>
-                    <Button variant="secondary" style={{minWidth:"10%"}} onClick={() => this.sortUsers('id')}>
-                        {(this.state.sortedBy==="idAsc")? "↑":""}{(this.state.sortedBy==="idDesc")? "↓":""}&nbsp;ID&nbsp;
+                    <Button variant="secondary" style={{minWidth: "10%"}} onClick={() => this.sortUsers('id')}>
+                        {(this.state.sortedBy === "idAsc") ? "↑" : ""}{(this.state.sortedBy === "idDesc") ? "↓" : ""}&nbsp;ID&nbsp;
                     </Button>
                     <Button variant="secondary" onClick={() => this.sortUsers('firstName')}>
-                        {(this.state.sortedBy==="firstNameAsc")? "↑":""}{(this.state.sortedBy==="firstNameDesc")? "↓":""}&nbsp;First&nbsp;Name&nbsp;
+                        {(this.state.sortedBy === "firstNameAsc") ? "↑" : ""}{(this.state.sortedBy === "firstNameDesc") ? "↓" : ""}&nbsp;First&nbsp;Name&nbsp;
                     </Button>
                     <Button variant="secondary" onClick={() => this.sortUsers('secondName')}>
-                        {(this.state.sortedBy==="lastNameAsc")? "↑":""}{(this.state.sortedBy==="lastNameDesc")? "↓":""}&nbsp;Last&nbsp;Name&nbsp;
+                        {(this.state.sortedBy === "lastNameAsc") ? "↑" : ""}{(this.state.sortedBy === "lastNameDesc") ? "↓" : ""}&nbsp;Last&nbsp;Name&nbsp;
                     </Button>
                     <Button variant="secondary" onClick={() => this.sortUsers('age')}>
-                        {(this.state.sortedBy==="ageAsc")? "↑":""}{(this.state.sortedBy==="ageDesc")? "↓":""}&nbsp;Age&nbsp;
+                        {(this.state.sortedBy === "ageAsc") ? "↑" : ""}{(this.state.sortedBy === "ageDesc") ? "↓" : ""}&nbsp;Age&nbsp;
                     </Button>
                     <Button variant="secondary" onClick={() => this.sortUsers('sex')}>
-                        {(this.state.sortedBy==="sexAsc")? "↑":""}{(this.state.sortedBy==="sexDesc")? "↓":""}&nbsp;Sex&nbsp;
+                        {(this.state.sortedBy === "sexAsc") ? "↑" : ""}{(this.state.sortedBy === "sexDesc") ? "↓" : ""}&nbsp;Sex&nbsp;
                     </Button>
                     <Button variant="secondary" onClick={() => this.sortUsers('money')}>
-                        {(this.state.sortedBy==="moneyAsc")? "↑":""}{(this.state.sortedBy==="moneyDesc")? "↓":""}&nbsp;Money&nbsp;
+                        {(this.state.sortedBy === "moneyAsc") ? "↑" : ""}{(this.state.sortedBy === "moneyDesc") ? "↓" : ""}&nbsp;Money&nbsp;
                     </Button>
                 </ButtonGroup>
                 <hr/>
@@ -65,11 +65,15 @@ export class GetUsers extends React.Component {
             case "id":
                 if (this.state.sortedBy !== "idAsc") {
                     sortedBy = "idAsc"
-                    sortedData.sort((a, b) => parseInt(a.id) < parseInt(b.id) ? -1 : 1)
+                    sortedData.sort((a, b) =>
+                        (isNaN(parseInt(a.id)) ? 0 : parseInt(a.id)) <
+                        (isNaN(parseInt(b.id)) ? 0 : parseInt(b.id)) ? -1 : 1)
                 }
                 if ((this.state.sortedBy === "idAsc")) {
                     sortedBy = "idDesc"
-                    sortedData.sort((a, b) => parseInt(a.id) > parseInt(b.id) ? -1 : 1)
+                    sortedData.sort((a, b) =>
+                        (isNaN(parseInt(a.id)) ? 0 : parseInt(a.id)) >
+                        (isNaN(parseInt(b.id)) ? 0 : parseInt(b.id)) ? -1 : 1)
                 }
                 if ((this.state.sortedBy === "idDesc")) {
                     sortedBy = ""
@@ -110,11 +114,15 @@ export class GetUsers extends React.Component {
             case "age":
                 if (this.state.sortedBy !== "ageAsc") {
                     sortedBy = "ageAsc"
-                    sortedData.sort((a, b) => parseInt(a.age) < parseInt(b.age) ? -1 : 1)
+                    sortedData.sort((a, b) =>
+                        (isNaN(parseInt(a.age)) ? 0 : parseInt(a.age)) <
+                        (isNaN(parseInt(b.age)) ? 0 : parseInt(b.age)) ? -1 : 1)
                 }
                 if ((this.state.sortedBy === "ageAsc")) {
                     sortedBy = "ageDesc"
-                    sortedData.sort((a, b) => parseInt(a.age) > parseInt(b.age) ? -1 : 1)
+                    sortedData.sort((a, b) =>
+                        (isNaN(parseInt(a.age)) ? 0 : parseInt(a.age)) >
+                        (isNaN(parseInt(b.age)) ? 0 : parseInt(b.age)) ? -1 : 1)
                 }
                 if ((this.state.sortedBy === "ageDesc")) {
                     sortedBy = ""
@@ -140,11 +148,15 @@ export class GetUsers extends React.Component {
             case "money":
                 if (this.state.sortedBy !== "moneyAsc") {
                     sortedBy = "moneyAsc"
-                    sortedData.sort((a, b) => parseFloat(a.money) < parseFloat(b.money) ? -1 : 1)
+                    sortedData.sort((a, b) =>
+                        (isNaN(parseFloat(a.money)) ? 0 : parseFloat(a.money)) <
+                        (isNaN(parseFloat(b.money)) ? 0 : parseFloat(b.money)) ? -1 : 1)
                 }
                 if (this.state.sortedBy === "moneyAsc") {
                     sortedBy = "moneyDesc"
-                    sortedData.sort((a, b) => parseFloat(a.money) > parseFloat(b.money) ? -1 : 1)
+                    sortedData.sort((a, b) =>
+                        (isNaN(parseFloat(a.money)) ? 0 : parseFloat(a.money)) >
+                        (isNaN(parseFloat(b.money)) ? 0 : parseFloat(b.money)) ? -1 : 1)
                 }
                 if ((this.state.sortedBy === "moneyDesc")) {
                     sortedBy = ""
@@ -200,7 +212,9 @@ export class GetUsers extends React.Component {
     }
 
     componentDidMount() {
-        this.readUsers().then(r => console.log(r))
+        this.readUsers().catch(function (error) {
+            console.log(error);
+        })
     }
 }
 

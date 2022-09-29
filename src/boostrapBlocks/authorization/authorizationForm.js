@@ -101,13 +101,17 @@ class AuthorizationForm extends React.Component {
                         <input onChange={e => emailHandler(e)} onBlur={e => blurHandler(e)} name='email'
                                type="email"
                                placeholder="Enter your email..."/>
+                        <div>&nbsp;</div>
                         <hr/>
                         {(this.state.passwordDirty && this.state.passwordError) &&
                             <div style={{color: "red"}}> {this.state.passwordError} </div>}
+                        {(!this.state.passwordDirty && this.state.passwordError) &&
+                            <div style={{color: "red"}}>&nbsp;</div>}
                         <input onChange={e => passwordHandler(e)} onBlur={e => blurHandler(e)}
                                name='password'
                                type="text"
                                placeholder="Enter your password..."/>
+                        <div>&nbsp;</div>
                         <hr/>
                         <Button variant="primary" type='submit' onClick={submit} className="Nav-btn"> GO</Button>
                     </Card.Body>

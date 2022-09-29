@@ -1,7 +1,7 @@
 import React from "react";
-import CreateCarForm from "../../blocks/cars/createCarForm";
+import PostCar from "../cars/postCar";
 import PostUser from "../users/postUser";
-import CreateHouseForm from "../../blocks/houses/createHouseform";
+import PostHouse from "../houses/postHouse";
 import PostUserHouse from "./postUserHouse";
 import PostUserMoney from "../users/postUserMoney";
 import PostUserCar from "./postUserCar";
@@ -20,8 +20,8 @@ export class AllPostBlock extends React.Component {
                 <PostUserHouse/>
 
                 <PostUserCar/>
-                <CreateCarForm/>
-                <CreateHouseForm/>
+                <PostCar/>
+                <PostHouse/>
 
 
             </div>
