@@ -8,9 +8,9 @@ import App from './App';
  * Запуск тестов возможен без предварительного запуска приложения через npm start.
  */
 
-test('renders learn react link', () => {
+test('renders Authorization page', () => {
   render(<App />);
-  const text = "home page"
+  const text = "Authorization"
   const descriptionElement = screen.getByText(text);
   expect(descriptionElement).toBeInTheDocument();
 });

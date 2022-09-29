@@ -3,6 +3,17 @@ import {FLOAT_REGEXP, FLOAT_STEP, INT_REGEXP} from "../../utils/constants";
 import API from "../../utils/API";
 import {Button, ButtonGroup, Table} from "react-bootstrap";
 
+/**
+ * React-компонент, отвечающий за создание и отправку POST запроса,
+ * позволяющего создать в БД нового пользователя посредством API
+ *
+ * Для создания и отображения формы ввода использует метод render()
+ * Для отправки запроса использует библиотеку axios и асинхронную функцию pushUserToAPI,
+ * вызываемую кнопкой отправки данных.
+ * В случае, если данные корректны, функция собирает данные из полей формы,
+ * формирует из них json-файл и встраивает как тело запроса axios.
+ */
+
 export class PostUser extends React.Component {
 
     constructor(props) {

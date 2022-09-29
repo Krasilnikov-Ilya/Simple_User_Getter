@@ -1,6 +1,7 @@
 import React from "react";
 import API from "../../utils/API";
 import {INT_REGEXP} from "../../utils/constants";
+import {Button, ButtonGroup, Table} from "react-bootstrap";
 
 /**
  * React-компонент, отвечающий за создание и отправку GET запроса,
@@ -26,17 +27,16 @@ import {INT_REGEXP} from "../../utils/constants";
  * renderParkingPlacesTableRows() и новых элементов-жителей методом renderLodgersTableRows()
  */
 
-export class ReadHouseById extends React.Component {
+export class GetHouse extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            tableData: [
-                {
-                    "parkingPlaces": [],
-                    "lodgers": []
-                }
-            ]
+            tableData: [],
+            parkingPlaces: [],
+            lodgers: [],
+            houseIdInput: 1,
+            answer: ""
         };
         this.addHouse = this.addHouse.bind(this)
         this.renderLodgersTableRows = this.renderLodgersTableRows.bind(this)
@@ -45,86 +45,113 @@ export class ReadHouseById extends React.Component {
     }
 
     addHouse = async () => {
-        let num = parseInt(document.getElementById("house_input").value)
+        let answer
+        let num = parseInt(this.state.houseIdInput)
         if (!num || num < 1) {
             console.log("Invalid input")
+            answer = " Invalid input"
+            this.setState({answer})
         } else {
             let houses_uri = '/house/' + num.toString();
-            let houseData = await API.get(houses_uri);
-            this.state = {
-                tableData: []
-            };
-            let tableData = [...this.state.tableData]
-            let data = {
-                id: houseData.data.id,
-                floorCount: houseData.data.floorCount,
-                price: houseData.data.price,
-                parkingPlaces: houseData.data.parkingPlaces,
-                lodgers: houseData.data.lodgers
+            let houseData = await API.get(houses_uri)
+            if (houseData.status === 204) {
+                answer = houseData.status + " house not found"
+                this.setState({answer})
+            } else {
+                let tableData = []
+                let data = {
+                    id: houseData.data.id,
+                    floorCount: houseData.data.floorCount,
+                    price: houseData.data.price,
+                    parkingPlaces: houseData.data.parkingPlaces,
+                    lodgers: houseData.data.lodgers
+                }
+                tableData.push(data)
+                let parkingPlaces = houseData.data.parkingPlaces
+                let lodgers = houseData.data.lodgers
+                answer = houseData.status + " ok"
+                this.setState({answer})
+                this.setState({tableData})
+                this.setState({parkingPlaces})
+                this.setState({lodgers})
             }
-            tableData.push(data)
-            this.setState({tableData});
         }
 
     }
 
     render() {
         const houseData = this.state.tableData
-        if (!houseData) return null;
 
-        return (
-            <div>
-                <hr/>
-                <input type="number" pattern={INT_REGEXP} id="house_input"/>
-                <button className="tableButton" onClick={this.addHouse}><p>Read</p></button>
-                <hr/>
-                <table className="table">
-                    <thead>
-                    <tr key="home">
-                        <th> ID:</th>
-                        <th> Floor Count:</th>
-                        <th> Price:</th>
-                        <th> Parking Places:</th>
-                        <th> Lodgers:</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {this.renderHouseTableRows()}
-                    </tbody>
-                </table>
-                <hr/>
-                <table className="table">
-                    <thead>
-                    <tr key="person">
-                        <th> ID:</th>
-                        <th> First name:</th>
-                        <th> Last name:</th>
-                        <th> Age:</th>
-                        <th> Sex:</th>
-                        <th> Money:</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {this.renderLodgersTableRows()}
-                    </tbody>
-                </table>
-                <hr/>
-                <table className="table">
-                    <thead>
-                    <tr key="parking">
-                        <th> ID:</th>
-                        <th> isWarm:</th>
-                        <th> isCovered:</th>
-                        <th> placesCount:</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {this.renderParkingPlacesTableRows()}
-                    </tbody>
-                </table>
-            </div>
+        const houseIdHandler = (e) => {
+            let houseIdInput = parseInt(e.target.value)
+            this.setState({houseIdInput})
+        }
 
-        )
+        if (!houseData) {
+            return null
+        } else {
+            return (
+                <div>
+                    <hr/>
+                    <div>
+                        <ButtonGroup>
+                            <Button variant="secondary">
+                                <input onChange={e => houseIdHandler(e)} type="number" pattern={INT_REGEXP}
+                                       id="house_input"/></Button>
+                            <Button className="tableButton" onClick={this.addHouse}>Read</Button>
+                            <Button className="status" disabled
+                                    variant="secondary">{"Status: " + this.state.answer}</Button>
+                        </ButtonGroup>
+                    </div>
+                    <hr/>
+                    <Table striped bordered hover className="table">
+                        <thead>
+                        <tr key="home">
+                            <th> ID:</th>
+                            <th> Floor&nbsp;Count:</th>
+                            <th> Price:</th>
+                            <th> Parking&nbsp;Places:</th>
+                            <th> Lodgers:</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {this.renderHouseTableRows()}
+                        </tbody>
+                    </Table>
+                    <hr/>
+                    <Table striped bordered hover className="table">
+                        <thead>
+                        <tr key="person">
+                            <th> ID:</th>
+                            <th> First&nbsp;name:</th>
+                            <th> Last&nbsp;name:</th>
+                            <th> Age:</th>
+                            <th> Sex:</th>
+                            <th> Money:</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {this.renderLodgersTableRows()}
+                        </tbody>
+                    </Table>
+                    <hr/>
+                    <Table striped bordered hover className="table">
+                        <thead>
+                        <tr key="parking">
+                            <th> ID:</th>
+                            <th> isWarm:</th>
+                            <th> isCovered:</th>
+                            <th> placesCount:</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {this.renderParkingPlacesTableRows()}
+                        </tbody>
+                    </Table>
+                </div>
+
+            )
+        }
     }
 
     renderHouseTableRows() {
@@ -138,10 +165,10 @@ export class ReadHouseById extends React.Component {
                     <td>{house.floorCount}</td>
                     <td>{house.price}</td>
                     <td>
-                        {Object.keys(house.parkingPlaces).length}
+                        {Object.keys(house.parkingPlaces).length === 0 ? null : Object.keys(house.parkingPlaces).length}
                     </td>
                     <td>
-                        {Object.keys(house.lodgers).length}
+                        {Object.keys(house.lodgers).length === 0 ? null : Object.keys(house.lodgers).length}
                     </td>
                 </tr>
             )
@@ -152,7 +179,7 @@ export class ReadHouseById extends React.Component {
     renderLodgersTableRows() {
         const houseData = this.state.tableData
         if (!houseData) return null;
-        const lodgerData = this.state.tableData[0].lodgers
+        const lodgerData = this.state.lodgers
         if (!lodgerData) return null;
         let result = [];
         lodgerData.forEach(lodger => {
@@ -171,7 +198,9 @@ export class ReadHouseById extends React.Component {
     }
 
     renderParkingPlacesTableRows() {
-        const parkingPlacesData = this.state.tableData[0].parkingPlaces
+        const houseData = this.state.tableData
+        if (!houseData) return null;
+        const parkingPlacesData = this.state.parkingPlaces
         if (!parkingPlacesData) return null;
         let result = [];
         parkingPlacesData.forEach(parkingPlace => {
@@ -188,6 +217,12 @@ export class ReadHouseById extends React.Component {
         });
         return result;
     }
+
+    componentDidMount() {
+        this.addHouse().catch(function (error) {
+            console.log(error);
+        })
+    }
 }
 
-export default ReadHouseById
+export default GetHouse

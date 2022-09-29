@@ -9,7 +9,7 @@ import PostUserMoney from "./boostrapBlocks/users/postUserMoney";
 import PostUserCar from "./boostrapBlocks/crossover/postUserCar";
 import PostUserHouse from "./boostrapBlocks/crossover/postUserHouse";
 import GetHouses from "./boostrapBlocks/houses/getHouses";
-import ReadHouseById from "./boostrapBlocks/houses/readHouseById";
+import GetHouse from "./boostrapBlocks/houses/getHouse";
 import PostHouse from "./boostrapBlocks/houses/postHouse";
 import AllPostBlock from "./boostrapBlocks/crossover/allPostBlock";
 import {AxiosForm} from "./utils/axiosForm";
@@ -48,7 +48,7 @@ function App() {
   return (
       <HashRouter>
         <div className="App">
-          <Navbar className="App-header" style={{padding: "2%"}} bg="light" expand="lg">
+          <Navbar className="App-header" style={{padding: "2%"}} bg="light" expand="sm">
             <Navbar.Brand href="#">&nbsp;&nbsp;&nbsp;<img
                 src="logo192.png"
                 width={"32"}
@@ -91,7 +91,7 @@ function App() {
               <Route path="/read/cars" element={<GetCars/>}/>
 
               <Route path="/read/houses" element={<GetHouses/>}/>
-              <Route path="/read/house" element={<ReadHouseById/>}/>
+              <Route path="/read/house" element={<GetHouse/>}/>
               <Route path="/create/house" element={<PostHouse/>}/>
 
               <Route path="/create/all" element={<AllPostBlock/>}/>
